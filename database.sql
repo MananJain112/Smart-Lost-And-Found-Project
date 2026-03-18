@@ -1,0 +1,75 @@
+CREATE TABLE IF NOT EXISTS USER (
+    UserID INTEGER PRIMARY KEY AUTOINCREMENT,
+    FullName TEXT NOT NULL,
+    Email TEXT NOT NULL UNIQUE,
+    Phone TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ACCOUNT_CREDENTIALS (
+    CredID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserID INTEGER,
+    Username TEXT UNIQUE NOT NULL,
+    PasswordHash TEXT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES USER(UserID)
+);
+
+CREATE TABLE IF NOT EXISTS LOST_ITEMS (
+    LostID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserID INTEGER,
+    ItemName TEXT NOT NULL,
+    Category TEXT,
+    Brand TEXT,
+    Color TEXT,
+    IdentificationMarks TEXT,
+    LostDate TEXT,
+    LostTime TEXT,
+    LastSeenLocation TEXT,
+    ImagePath TEXT,
+    AdditionalDetails TEXT,
+    Status TEXT DEFAULT 'Pending',
+    FOREIGN KEY (UserID) REFERENCES USER(UserID)
+);
+
+CREATE TABLE IF NOT EXISTS FOUND_ITEMS (
+    FoundID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserID INTEGER,
+    ItemName TEXT NOT NULL,
+    Category TEXT,
+    Brand TEXT,
+    Color TEXT,
+    IdentificationMarks TEXT,
+    FoundDate TEXT,
+    FoundTime TEXT,
+    FoundLocation TEXT,
+    KeptLocation TEXT,
+    ImagePath TEXT,
+    AdditionalNotes TEXT,
+    Status TEXT DEFAULT 'Pending',
+    FOREIGN KEY (UserID) REFERENCES USER(UserID)
+);
+
+CREATE TABLE IF NOT EXISTS MATCHED_ITEMS (
+    MatchID INTEGER PRIMARY KEY AUTOINCREMENT,
+    LostID INTEGER,
+    FoundID INTEGER,
+    MatchDate TEXT,
+    Status TEXT DEFAULT 'Matched',
+    FOREIGN KEY (LostID) REFERENCES LOST_ITEMS(LostID),
+    FOREIGN KEY (FoundID) REFERENCES FOUND_ITEMS(FoundID)
+);
+CREATE TABLE IF NOT EXISTS ADMIN (
+    AdminID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Username TEXT UNIQUE,
+    PasswordHash TEXT
+);
+INSERT OR IGNORE INTO ADMIN(Username, PasswordHash)
+VALUES ('admin', 'admin123');
+CREATE TABLE IF NOT EXISTS CLAIMS (
+    ClaimID INTEGER PRIMARY KEY AUTOINCREMENT,
+    FoundID INTEGER,
+    ClaimantName TEXT,
+    ClaimantEmail TEXT,
+    ClaimantPhone TEXT,
+    ClaimMessage TEXT,
+    Status TEXT DEFAULT 'Pending'
+);
