@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <div class="project-title">LOST & FOUND</div>
+
+    <h2>VERIFY OTP</h2>
+
+    {% if error %}
+        <p class="error-msg">{{ error }}</p>
+    {% endif %}
+
+    <!-- STEP 2: VERIFY OTP + RESET PASSWORD -->
+    <form action="/verify_otp" method="POST" autocomplete="off">
+
+        <input type="text"
+               class="input-box"
+               name="otp"
+               placeholder="Enter OTP Sent to Your Email"
+               required>
+
+        <input type="password"
+               class="input-box"
+               name="new_password"
+               placeholder="Enter New Password"
+               required>
+
+        <input type="password"
+               class="input-box"
+               name="confirm_password"
+               placeholder="Confirm New Password"
+               required>
+
+        <button type="submit" class="primary-btn">
+            VERIFY & RESET
+        </button>
+
+    </form>
+
+    <div class="bottom-links">
+        <a href="{{ url_for('login_page') }}">Back to Login</a>
+    </div>
+
+</div>
+
+</body>
+</html>

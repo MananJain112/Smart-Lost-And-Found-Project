@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found - Home</title>
+
+    <!-- Flask static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <div class="form-header">
+        <h2>LOST & FOUND</h2>
+        <p class="subtitle">Choose an option</p>
+    </div>
+
+    <!-- Report Lost Item -->
+    <a href="{{ url_for('lost_form') }}" style="width: 100%;">
+        <button class="primary-btn" style="margin-bottom: 14px;">
+            REPORT AN ITEM LOST
+        </button>
+    </a>
+
+    <!-- Report Found Item -->
+    <a href="{{ url_for('found_form') }}" style="width: 100%;">
+        <button class="primary-btn" style="margin-bottom: 14px;">
+            REPORT AN ITEM FOUND
+        </button>
+    </a>
+
+    <!-- NEW: View Found / Matched Items -->
+    <a href="{{ url_for('view_items') }}" style="width: 100%;">
+        <button class="primary-btn" style="margin-bottom: 14px;">
+            VIEW FOUND / MATCHED ITEMS
+        </button>
+    </a>
+
+    <!-- Logout Button -->
+    <a href="{{ url_for('logout') }}" style="width: 100%;">
+        <button class="primary-btn" style="background-color: #8b0000;">
+            LOGOUT
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>

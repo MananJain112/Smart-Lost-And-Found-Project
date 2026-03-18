@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="auth-container">
+
+    <div class="project-title">LOST & FOUND</div>
+
+    <h2>Sign Up</h2>
+
+    <p class="subtitle">
+        Already have an account?
+        <a href="{{ url_for('login_page') }}" class="login-link">Login</a>
+    </p>
+
+    <form action="/signup" method="POST" autocomplete="off">
+
+        <input type="text"
+               class="input-box"
+               name="fullname"
+               placeholder="Full Name"
+               required>
+
+        <input type="email"
+               class="input-box"
+               name="email"
+               placeholder="Email Address"
+               required>
+
+        <input type="text"
+               class="input-box"
+               name="phone"
+               placeholder="Phone Number"
+               required>
+
+        <input type="text"
+               class="input-box"
+               name="username"
+               placeholder="Username"
+               required>
+
+        <input type="password"
+               class="input-box"
+               name="password"
+               placeholder="Password"
+               required>
+
+        <button type="submit" class="primary-btn">
+            CONTINUE
+        </button>
+
+    </form>
+
+    <p class="or-text">Or Continue with</p>
+
+    <div class="social-icons">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968764.png" alt="Meta">
+    </div>
+
+</div>
+
+</body>
+</html>

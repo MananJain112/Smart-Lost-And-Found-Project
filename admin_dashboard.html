@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="auth-container">
+
+<h2>ADMIN DASHBOARD</h2>
+
+<p class="subtitle">System Management Panel</p>
+
+
+<!-- ================= STATISTICS ================= -->
+
+<h3 style="margin-top:20px;">System Statistics</h3>
+
+<div class="items-container">
+
+<div class="item-card">
+<p><strong>Total Active Lost Items:</strong> {{ total_lost }}</p>
+</div>
+
+<div class="item-card">
+<p><strong>Total Found Items:</strong> {{ total_found }}</p>
+</div>
+
+<div class="item-card">
+<p><strong>Returned Items:</strong> {{ returned_items }}</p>
+</div>
+
+<div class="item-card">
+<p><strong>Pending Claims:</strong> {{ pending_claims }}</p>
+</div>
+
+</div>
+
+
+
+<!-- ================= CLAIM REQUESTS ================= -->
+
+<h3 style="margin-top:30px;">Pending Claims</h3>
+
+{% if claims|length == 0 %}
+
+<div class="no-items-box">
+<p>No claims submitted yet.</p>
+</div>
+
+{% else %}
+
+<div class="items-container">
+
+{% for claim in claims %}
+
+<div class="item-card">
+
+<p><strong>Item:</strong> {{ claim[1] }}</p>
+
+<p><strong>Claimant Name:</strong> {{ claim[2] }}</p>
+
+<p><strong>Email:</strong> {{ claim[3] }}</p>
+
+<p><strong>Phone:</strong> {{ claim[4] }}</p>
+
+<p><strong>Status:</strong> {{ claim[5] }}</p>
+
+<div style="display:flex; gap:10px; margin-top:10px;">
+
+<a href="{{ url_for('approve_claim', claim_id=claim[0]) }}">
+<button class="primary-btn">Approve</button>
+</a>
+
+<a href="{{ url_for('reject_claim', claim_id=claim[0]) }}">
+<button style="background:#c0392b; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer;">
+Reject
+</button>
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+
+
+<!-- ================= LOST ITEM MANAGEMENT ================= -->
+
+<h3 style="margin-top:35px;">Manage Lost Items</h3>
+
+{% if lost_items|length == 0 %}
+
+<div class="no-items-box">
+<p>No lost items available.</p>
+</div>
+
+{% else %}
+
+<div class="items-container">
+
+{% for item in lost_items %}
+
+{% if item[5] != 'Returned' and item[5] != 'Expired' %}
+
+<div class="item-card">
+
+<p><strong>Item:</strong> {{ item[1] }}</p>
+
+<p><strong>Category:</strong> {{ item[2] }}</p>
+
+<p><strong>Brand:</strong> {{ item[3] }}</p>
+
+<p><strong>Color:</strong> {{ item[4] }}</p>
+
+<p><strong>Status:</strong> {{ item[5] }}</p>
+
+<div style="display:flex; gap:10px; margin-top:10px;">
+
+<a href="{{ url_for('mark_returned', lost_id=item[0]) }}">
+<button class="primary-btn">Mark Returned</button>
+</a>
+
+<a href="{{ url_for('mark_expired', lost_id=item[0]) }}">
+<button style="background:#e67e22; color:white; border:none; padding:10px; border-radius:8px; cursor:pointer;">
+Mark Expired
+</button>
+</a>
+
+</div>
+
+</div>
+
+{% endif %}
+
+{% endfor %}
+
+</div>
+
+{% endif %}
+
+
+
+<!-- ================= BUTTONS ================= -->
+
+<a href="{{ url_for('home') }}">
+<button class="secondary-btn" style="margin-top:25px;">
+Back to Home
+</button>
+</a>
+
+<a href="{{ url_for('admin_logout') }}">
+<button class="secondary-btn" style="margin-top:10px;">
+Logout
+</button>
+</a>
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Items</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <div class="form-header">
+        <h2>LOST & FOUND</h2>
+        <p class="subtitle">Matched Items & Found Items</p>
+    </div>
+
+    <!-- MATCHED ITEMS -->
+    <h3 style="margin-top:25px;">Matched Items</h3>
+
+    {% if matched_items|length == 0 %}
+        <div class="no-items-box">
+            <p>No matched items yet.</p>
+        </div>
+    {% else %}
+        <div class="items-container">
+            {% for item in matched_items %}
+                <div class="item-card">
+                    <h3>{{ item[0] }}</h3>
+                    <p><strong>Category:</strong> {{ item[1] }}</p>
+                    <p><strong>Location Found:</strong> {{ item[2] }}</p>
+                    <p><strong>Date:</strong> {{ item[3] }}</p>
+                    <p style="color:#7CFF8E;"><strong>Status:</strong> Matched</p>
+
+                    {% if item[4] %}
+                        <img src="{{ url_for('uploaded_file', filename=item[4]) }}" class="item-image">
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- FOUND ITEMS -->
+    <h3 style="margin-top:35px;">Reported Found Items</h3>
+
+    {% if found_items|length == 0 %}
+        <div class="no-items-box">
+            <p>No found items reported yet.</p>
+        </div>
+    {% else %}
+        <div class="items-container">
+            {% for item in found_items %}
+                <div class="item-card">
+                    <h3>{{ item[1] }}</h3>
+                    <p><strong>Category:</strong> {{ item[2] }}</p>
+                    <p><strong>Location Found:</strong> {{ item[3] }}</p>
+                    <p><strong>Date:</strong> {{ item[4] }}</p>
+                    <p><strong>Status:</strong> {{ item[5] }}</p>
+
+                    {% if item[6] %}
+                        <img src="{{ url_for('uploaded_file', filename=item[6]) }}" class="item-image">
+                    {% endif %}
+
+                    <a href="{{ url_for('claim_item', found_id=item[0]) }}">
+                        <button class="secondary-btn" style="margin-top:10px;">
+                            Claim This Item
+                        </button>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}">
+        <button class="primary-btn" style="margin-top:30px;">
+            BACK TO HOME
+        </button>
+    </a>
+
+</div>
+
+</body>
+</html>

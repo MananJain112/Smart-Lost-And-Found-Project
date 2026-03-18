@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Claim Item</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+<div class="form-header">
+<h2>CLAIM FOUND ITEM</h2>
+<p class="subtitle">Submit details to claim this item</p>
+</div>
+
+{% if success %}
+
+<p class="success-msg">{{ success }}</p>
+
+{% endif %}
+
+<form method="POST">
+
+<input type="text" name="name" class="input-box" placeholder="Your Full Name" required>
+
+<input type="email" name="email" class="input-box" placeholder="Email Address" required>
+
+<input type="text" name="phone" class="input-box" placeholder="Phone Number" required>
+
+<textarea name="message"
+class="input-box"
+placeholder="Describe why this item belongs to you (marks, details, etc)"
+required></textarea>
+
+<button type="submit" class="primary-btn">
+Submit Claim
+</button>
+
+</form>
+
+<a href="{{ url_for('view_items') }}">
+<button class="secondary-btn" style="margin-top:15px;">
+Back
+</button>
+</a>
+
+</div>
+
+</body>
+
+</html>

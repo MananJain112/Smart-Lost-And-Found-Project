@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="auth-container">
+
+<h2>LOGIN</h2>
+
+{% if error %}
+<p class="error-msg">{{ error }}</p>
+{% endif %}
+
+{% if success %}
+<p class="success-msg">{{ success }}</p>
+{% endif %}
+
+<form action="/login" method="POST">
+
+<input type="text"
+name="username"
+class="input-box"
+placeholder="Username"
+required>
+
+<input type="password"
+name="password"
+class="input-box"
+placeholder="Password"
+required>
+
+<button type="submit" class="primary-btn">
+Submit
+</button>
+
+</form>
+
+
+<!-- ADMIN LOGIN BUTTON -->
+
+<a href="{{ url_for('admin_login') }}">
+<button class="secondary-btn" style="margin-top:15px;">
+Admin Login
+</button>
+</a>
+
+
+<div class="bottom-links">
+
+<a href="{{ url_for('signup_page') }}">Sign Up</a>
+
+<a href="{{ url_for('forgot_password') }}">Forgot Password</a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

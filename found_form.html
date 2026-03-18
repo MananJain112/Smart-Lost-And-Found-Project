@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Found Item</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="form-container">
+
+<div class="form-header">
+<h2>LOST & FOUND</h2>
+<p class="subtitle">Report a Found Item</p>
+</div>
+
+<!-- Back Button -->
+<div class="back-btn-wrapper">
+<a href="{{ url_for('home') }}">
+<button type="button" class="secondary-btn">
+← Back to Home
+</button>
+</a>
+</div>
+
+<form action="/found_form" method="POST" enctype="multipart/form-data">
+
+<!-- Item Name -->
+<input type="text"
+class="input-box"
+name="item_name"
+placeholder="Item Name"
+required>
+
+<!-- Category -->
+<select class="input-box"
+name="category"
+onchange="checkOthers(this,'found-other-category')"
+required>
+
+<option value="">Category of Item</option>
+<option value="Electronics">Electronics</option>
+<option value="Documents">Documents</option>
+<option value="Accessories">Accessories</option>
+<option value="Bag / Luggage">Bag / Luggage</option>
+<option value="Wallet / Money">Wallet / Money</option>
+<option value="Others">Others</option>
+
+</select>
+
+<input type="text"
+class="input-box"
+name="other_category"
+id="found-other-category"
+placeholder="Please specify category"
+style="display:none">
+
+<!-- Brand -->
+<input type="text"
+class="input-box"
+name="brand"
+placeholder="Brand / Model">
+
+<!-- Color -->
+<input type="text"
+class="input-box"
+name="color"
+placeholder="Color of Item">
+
+<!-- Identification -->
+<textarea
+class="input-box"
+name="identification_marks"
+placeholder="Distinct Identification Marks"></textarea>
+
+<!-- Found Date -->
+<input type="date"
+class="input-box"
+name="found_date"
+required>
+
+<!-- Found Time -->
+<input type="time"
+class="input-box"
+name="found_time"
+required>
+
+<!-- Found Location -->
+<input type="text"
+class="input-box"
+name="found_location"
+placeholder="Location Where Found"
+required>
+
+<!-- Image Upload -->
+<input type="file"
+class="input-box"
+name="image"
+accept="image/*">
+
+<!-- Where Item is Kept -->
+<select class="input-box"
+name="kept_at"
+onchange="checkOthers(this,'found-other-location')"
+required>
+
+<option value="">Where is the item kept?</option>
+<option value="Security Office">Security Office</option>
+<option value="Administration Office">Administration Office</option>
+<option value="Library Counter">Library Counter</option>
+<option value="With Finder">With Finder</option>
+<option value="Other">Other</option>
+
+</select>
+
+<input type="text"
+class="input-box"
+name="other_kept_location"
+id="found-other-location"
+placeholder="Please specify location"
+style="display:none">
+
+<!-- Additional Notes -->
+<textarea
+class="input-box"
+name="additional_notes"
+placeholder="Additional Notes (Optional)"></textarea>
+
+<button type="submit" class="primary-btn">
+Report Found Item
+</button>
+
+</form>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

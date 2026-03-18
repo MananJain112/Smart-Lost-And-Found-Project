@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report Lost Item</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="form-container">
+
+<div class="form-header">
+<h2>LOST & FOUND</h2>
+<p class="subtitle">Report a Lost Item</p>
+</div>
+
+<!-- Back Button -->
+<div class="back-btn-wrapper">
+<a href="{{ url_for('home') }}">
+<button type="button" class="secondary-btn">
+← Back to Home
+</button>
+</a>
+</div>
+
+<form action="/lost_form" method="POST" enctype="multipart/form-data">
+
+<!-- Item Name -->
+<input type="text"
+class="input-box"
+name="item_name"
+placeholder="Item Name"
+required>
+
+<!-- Category -->
+<select class="input-box"
+name="category"
+onchange="checkOthers(this,'lost-other-category')"
+required>
+
+<option value="">Category of Item</option>
+<option value="Electronics">Electronics</option>
+<option value="Documents">Documents</option>
+<option value="Accessories">Accessories</option>
+<option value="Bag / Luggage">Bag / Luggage</option>
+<option value="Wallet / Money">Wallet / Money</option>
+<option value="Others">Others</option>
+
+</select>
+
+<input type="text"
+class="input-box"
+name="other_category"
+id="lost-other-category"
+placeholder="Please specify category"
+style="display:none">
+
+<!-- Brand -->
+<input type="text"
+class="input-box"
+name="brand"
+placeholder="Brand / Model (if any)">
+
+<!-- Color -->
+<input type="text"
+class="input-box"
+name="color"
+placeholder="Color of Item">
+
+<!-- Identification -->
+<textarea
+class="input-box"
+name="identification_marks"
+placeholder="Distinct Identification Marks"></textarea>
+
+<!-- Lost Date -->
+<input type="date"
+class="input-box"
+name="lost_date"
+required>
+
+<!-- Lost Time -->
+<input type="time"
+class="input-box"
+name="lost_time"
+required>
+
+<!-- Last Seen Location -->
+<input type="text"
+class="input-box"
+name="last_seen_location"
+placeholder="Last Seen Location"
+required>
+
+<!-- Image Upload -->
+<input type="file"
+class="input-box"
+name="image"
+accept="image/*">
+
+<!-- Additional Details -->
+<textarea
+class="input-box"
+name="additional_details"
+placeholder="Additional Details (Optional)"></textarea>
+
+<button type="submit" class="primary-btn">
+Report Lost Item
+</button>
+
+</form>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
